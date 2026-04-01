@@ -145,30 +145,32 @@ def task7(cursor, conn, category_id, assignment_name, max_score=100):
 # ------------------------------------------------------------------
 def task8(cursor, conn, category_id, new_weight):
     print("\n===== TASK 8: Update Category Weight =====")
- 
-    # show current weight first
+
     cursor.execute(
         "SELECT category_name, weight FROM Category WHERE category_id = %s",
         (category_id,)
     )
     row = cursor.fetchone()
     print(f"  Before: {row[0]} = {row[1]}%")
- 
-    cursor.execute(
-        "UPDATE Category SET weight = %s WHERE category_id = %s",
-        (new_weight, category_id)
-    )
-    conn.commit()
- 
-    cursor.execute(
-        "SELECT category_name, weight FROM Category WHERE category_id = %s",
-        (category_id,)
-    )
-    row = cursor.fetchone()
-    print(f"  After:  {row[0]} = {row[1]}%")
+
+    try:
+        cursor.execute(
+            "UPDATE Category SET weight = %s WHERE category_id = %s",
+            (new_weight, category_id)
+        )
+        conn.commit()
+        cursor.execute(
+            "SELECT category_name, weight FROM Category WHERE category_id = %s",
+            (category_id,)
+        )
+        row = cursor.fetchone()
+        print(f"  After:  {row[0]} = {row[1]}%")
+    except mysql.connector.Error as e:
+        conn.rollback()
+        print(f"  ERROR: {e.msg}")
     print()
- 
- 
+
+
 # ------------------------------------------------------------------
 # TASK 9 - Add 2 points to every student score on an assignment
 # ------------------------------------------------------------------
