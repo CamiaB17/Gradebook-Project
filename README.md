@@ -1,16 +1,17 @@
 ## Grade Book Database
-CSCI 432 - Database Systems | Group Project
+CSCI 432 - Database Systems | Group Project |
 Group members: Camia Bellamy, Erin McCoomer, Leighla-Marie Dantes
 
 ## How to run it
-Step 1 — Set up the database in MySQL
+Step 1 — Set up the database in MySQL,
 Open MySQL Workbench (or the MySQL command line) and run the two SQL files in order: ```
 sqlsource schema.sql
-source seed.sql ```
+source seed.sql ```,
 Or from the terminal: ```
 mysql -u root -p < schema.sql
 mysql -u root -p < seed.sql```
-Step 2 — Update the connection settings
+
+Step 2 — Update the connection settings,
 Open gradebook.py and change the DB_CONFIG at the top to match your MySQL login:```
 pythonDB_CONFIG = {
     "host":     "localhost",
@@ -18,12 +19,16 @@ pythonDB_CONFIG = {
     "password": "your_password_here",
     "database": "gradebook"
 } ```
+
 Step 3 — Run the script ```
 python gradebook.py```
 This runs all tasks (3 through 12) in order and prints the results.
 
 ## Files
-FileDescription`schema.sql`Creates the gradebook database and all 6 tables`seed.sql`Inserts sample data (3 courses, 8 students, 26 assignments)`gradebook.py`Python script that runs all tasks and prints output`README.md`This file
+`schema.sql` Creates the gradebook database and all 6 tables 
+`seed.sql` Inserts sample data (3 courses, 8 students, 26 assignments) 
+`gradebook.py` Python script that runs all tasks and prints output 
+`README.md` This file
 
 ## Database tables
 TablePurposeCourseStores courses (dept, number, name, semester, year), StudentStores student infoEnrollmentLinks students to courses (many-to-many), CategoryGrade categories per course with weights that sum to 100%AssignmentIndividual assignments belonging to a categoryScoreOne row per student per assignment
