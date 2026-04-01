@@ -122,16 +122,37 @@ def task6(cursor, course_id):
 # ------------------------------------------------------------------
 def task7(cursor, conn, category_id, assignment_name, max_score=100):
     print("\n===== TASK 7: Add Assignment =====")
- 
-    sql = """
+
+    # insert the assignment
+    cursor.execute("""
         INSERT INTO Assignment (category_id, assignment_name, max_score)
         VALUES (%s, %s, %s)
-    """
-    cursor.execute(sql, (category_id, assignment_name, max_score))
+    """, (category_id, assignment_name, max_score))
+    new_assignment_id = cursor.lastrowid
+
+    # find the course this category belongs to
+    cursor.execute(
+        "SELECT course_id FROM Category WHERE category_id = %s", (category_id,)
+    )
+    course_id = cursor.fetchone()[0]
+
+    # get all students enrolled in that course
+    cursor.execute(
+        "SELECT student_id FROM Enrollment WHERE course_id = %s", (course_id,)
+    )
+    students = cursor.fetchall()
+
+    # insert a default score of 0 for each enrolled student
+    for (student_id,) in students:
+        cursor.execute("""
+            INSERT INTO Score (assignment_id, student_id, score)
+            VALUES (%s, %s, 0)
+        """, (new_assignment_id, student_id))
+
     conn.commit()
-    print(f"  Added '{assignment_name}' to category {category_id} (max score: {max_score})")
- 
-    # show updated assignments for that category
+    print(f"  Added '{assignment_name}' to category {category_id} (max: {max_score})")
+    print(f"  Inserted default score of 0 for {len(students)} enrolled student(s).")
+
     cursor.execute(
         "SELECT assignment_id, assignment_name, max_score FROM Assignment WHERE category_id = %s",
         (category_id,)
