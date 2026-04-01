@@ -8,24 +8,24 @@ Open MySQL Workbench (or the MySQL command line) and run the two SQL files in or
 ```sqlsource schema.sql
 source seed.sql```
 Or from the terminal:
-''' mysql -u root -p < schema.sql
-mysql -u root -p < seed.sql '''
+```mysql -u root -p < schema.sql
+mysql -u root -p < seed.sql```
 
 Step 2 — Update the connection settings
 Open gradebook.py and change the DB_CONFIG at the top to match your MySQL login:
-''' pythonDB_CONFIG = {
+```pythonDB_CONFIG = {
     "host":     "localhost",
     "user":     "root",
     "password": "your_password_here",
     "database": "gradebook"
-} '''
+}```
 
 Step 3 — Run the script
-``` python gradebook.py ```
+```python gradebook.py```
 This runs all tasks (3 through 12) in order and prints the results.
 
 ## Files
-FileDescription' schema.sql 'Creates the gradebook database and all 6 tables' seed.sql 'Inserts sample data (3 courses, 8 students, 26 assignments)' gradebook.py 'Python script that runs all tasks and prints output'README.md'This file
+FileDescription `schema.sql` Creates the gradebook database and all 6 tables `seed.sql` Inserts sample data (3 courses, 8 students, 26 assignments) `gradebook.py` Python script that runs all tasks and prints output'README.md'This file
 
 ## Database tables
 TablePurposeCourseStores courses (dept, number, name, semester, year)StudentStores student infoEnrollmentLinks students to courses (many-to-many)CategoryGrade categories per course with weights that sum to 100%AssignmentIndividual assignments belonging to a categoryScoreOne row per student per assignment
@@ -39,6 +39,7 @@ TablePurposeCourseStores courses (dept, number, name, semester, year)StudentStor
 
 
 ## Notes
+
 
 * Task 9 and 10 cap scores at max_score using LEAST() so no one goes over 100
 * Task 12 only drops the lowest score in a category if there are 2 or more assignments
