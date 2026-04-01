@@ -52,6 +52,34 @@ CREATE TABLE Category (
     UNIQUE (course_id, category_name),
     FOREIGN KEY (course_id) REFERENCES Course(course_id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
+
+DELIMITER $$
+
+CREATE TRIGGER trg_category_weight_insert
+AFTER INSERT ON Category
+FOR EACH ROW
+BEGIN
+    DECLARE total DECIMAL(6,2);
+    SELECT SUM(weight) INTO total FROM Category WHERE course_id = NEW.course_id;
+    IF total > 100.01 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Category weights exceed 100% for this course';
+    END IF;
+END$$
+
+CREATE TRIGGER trg_category_weight_update
+AFTER UPDATE ON Category
+FOR EACH ROW
+BEGIN
+    DECLARE total DECIMAL(6,2);
+    SELECT SUM(weight) INTO total FROM Category WHERE course_id = NEW.course_id;
+    IF total > 100.01 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Category weights exceed 100% for this course';
+    END IF;
+END$$
+
+DELIMITER ;
  
 -- Individual assignments that belong to a category
 CREATE TABLE Assignment (
