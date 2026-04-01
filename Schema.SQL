@@ -97,7 +97,7 @@ CREATE TABLE Score (
     score_id      INT          NOT NULL AUTO_INCREMENT,
     assignment_id INT          NOT NULL,
     student_id    INT          NOT NULL,
-    score         DECIMAL(6,2) NOT NULL DEFAULT 0,
+    score         DECIMAL(6,2) DEFAULT NULL,
     PRIMARY KEY (score_id),
     UNIQUE (assignment_id, student_id),
     FOREIGN KEY (assignment_id) REFERENCES Assignment(assignment_id) ON DELETE CASCADE,
