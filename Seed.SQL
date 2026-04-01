@@ -1,6 +1,3 @@
-
-Copy
-
 -- CSCI 432 Database Systems
 -- Grade Book Database - Sample Data
 -- Group Project
