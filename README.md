@@ -30,9 +30,6 @@ This runs all tasks (3 through 12) in order and prints the results.
 `gradebook.py` Python script that runs all tasks and prints output 
 `README.md` This file
 
-## Database tables
-TablePurposeCourseStores courses (dept, number, name, semester, year), StudentStores student infoEnrollmentLinks students to courses (many-to-many), CategoryGrade categories per course with weights that sum to 100%AssignmentIndividual assignments belonging to a categoryScoreOne row per student per assignment
-
 ## Sample data included
 
 * 3 courses: CS 101, CS 301, MATH 201
