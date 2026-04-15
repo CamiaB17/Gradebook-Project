@@ -5,7 +5,8 @@
 # Runs all tasks (3-12) against a MySQL gradebook database.
  
 import mysql.connector
- 
+import getpass
+
 # --- connection settings ---
 # change these to match your MySQL login
 DB_CONFIG = {
