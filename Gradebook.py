@@ -126,10 +126,14 @@ def task7(cursor, conn, category_id, assignment_name, max_score=100):
 
     # insert the assignment
     cursor.execute("""
-        INSERT INTO Assignment (category_id, assignment_name, max_score)
+        INSERT IGNORE INTO Assignment (category_id, assignment_name, max_score)
         VALUES (%s, %s, %s)
     """, (category_id, assignment_name, max_score))
     new_assignment_id = cursor.lastrowid
+
+   if cursor.rowcount == 0:
+        print(f"  '{assignment_name}' already exists, skipping.")
+        return
 
     # find the course this category belongs to
     cursor.execute(
