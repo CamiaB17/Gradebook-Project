@@ -307,8 +307,8 @@ def task11(cursor, course_id, student_id):
         else:
             cat_pct = 0.0
  
-        contribution = weight * cat_pct / 100
-        total_grade += contribution
+        contribution = float(weight) * cat_pct / 100
+        total_grade += float(contribution)
         print(f"  {cat_name:<20} {weight:>5}%  {cat_pct:>7.2f}  {contribution:.2f}")
  
     print(f"\n  Final Grade: {total_grade:.2f} / 100")
@@ -368,8 +368,8 @@ def task12(cursor, course_id, student_id):
         else:
             cat_pct = 0.0
  
-        contribution = weight * cat_pct / 100
-        total_grade += contribution
+        contribution = float(weight) * cat_pct / 100
+        total_grade += float(contribution)
         print(f"  {cat_name:<20} {weight:>5}%  {cat_pct:>7.2f}  {contribution:.2f}    {note}")
  
     print(f"\n  Final Grade: {total_grade:.2f} / 100")
