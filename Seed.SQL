@@ -3,17 +3,6 @@
 -- Group Project
  
 USE gradebook;
-
-SET FOREIGN_KEY_CHECKS = 0;
-
-TRUNCATE TABLE Score;
-TRUNCATE TABLE Assignment;
-TRUNCATE TABLE Category;
-TRUNCATE TABLE Enrollment;
-TRUNCATE TABLE Student;
-TRUNCATE TABLE Course;
-
-SET FOREIGN_KEY_CHECKS = 1;
  
 -- Courses
 INSERT INTO Course (department, course_num, course_name, semester, year) VALUES
