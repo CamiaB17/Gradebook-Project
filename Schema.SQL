@@ -326,7 +326,6 @@ ORDER BY ct.category_name, a.assignment_name;
 -- (Redistribute CSCI 101 weights: keep total = 100)
 -- ============================================================
 
--- TASK 8: do the reduction FIRST, then the increases
 UPDATE Category SET weight = 40.00
 WHERE course_id = 1 AND category_name = 'Tests';      -- 50 → 40 (now total = 90)
 
