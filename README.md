@@ -44,3 +44,9 @@ This runs all tasks (3 through 12) in order and prints the results.
 * Task 12 only drops the lowest score in a category if there are 2 or more assignments
 * We used a separate Enrollment table instead of putting course_id on the Student
 table because students can be in multiple courses
+
+
+## ER Diagram 
+
+
+![CSCI 432 ER Diagram](<CSCI 432 ER Diagram.png>)
