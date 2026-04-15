@@ -513,5 +513,6 @@ FROM (
     GROUP BY e.student_id, ct.category_id, ct.weight
 ) AS cat_scores
 JOIN Student s ON cat_scores.student_id = s.student_id
+JOIN Course  c ON c.course_id = 1
 GROUP BY s.student_id, s.first_name, s.last_name
 ORDER BY final_grade_drop_lowest_pct DESC;
