@@ -11,7 +11,7 @@ import mysql.connector
 DB_CONFIG = {
     "host":     "localhost",
     "user":     "root",
-    "password": "password",
+    "password": getpass.getpass("Enter MySQL password: "),
     "database": "gradebook"
 }
  
