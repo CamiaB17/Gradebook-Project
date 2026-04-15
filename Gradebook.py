@@ -397,7 +397,7 @@ def main():
     task6(cursor, course_id=1)
  
     # Task 7 - add a new assignment to CS101 Homework category (category_id = 2)
-    task7(cursor, conn, category_id=2, assignment_name="HW6", max_score=100)
+    task7(cursor, conn, category_id=2, assignment_name="HW7", max_score=100)
  
     # Task 8 - change CS101 Homework weight from 20% to 15%
     task8(cursor, conn, category_id=2, new_weight=15)
