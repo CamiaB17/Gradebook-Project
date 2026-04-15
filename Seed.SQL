@@ -6,8 +6,8 @@ USE gradebook;
  
 -- Courses
 INSERT INTO Course (department, course_num, course_name, semester, year) VALUES
-    ('CS',   '101', 'Introduction to Computer Science', 'Fall',   2024),
-    ('CS',   '301', 'Database Systems',                 'Fall',   2024),
+    ('CSCI',   '101', 'Introduction to Computer Science', 'Fall',   2024),
+    ('CSCI',   '301', 'Database Systems',                 'Fall',   2024),
     ('MATH', '201', 'Linear Algebra',                   'Spring', 2024);
  
 -- Students
@@ -23,11 +23,11 @@ INSERT INTO Student (first_name, last_name, email) VALUES
     ('Hank',  'Nguyen',   'hnguyen@uni.edu');
  
 -- Enrollments
--- CS 101: Alice, Bob, Carol, David, Eve
+-- CSCI 101: Alice, Bob, Carol, David, Eve
 INSERT INTO Enrollment (course_id, student_id) VALUES
     (1,1),(1,2),(1,3),(1,4),(1,5);
  
--- CS 301: Alice, Carol, Frank, Grace, Hank
+-- CSCI 301: Alice, Carol, Frank, Grace, Hank
 INSERT INTO Enrollment (course_id, student_id) VALUES
     (2,1),(2,3),(2,6),(2,7),(2,8);
  
@@ -36,14 +36,14 @@ INSERT INTO Enrollment (course_id, student_id) VALUES
     (3,2),(3,4),(3,5),(3,6);
  
 -- Categories
--- CS 101: Participation 10%, Homework 20%, Tests 50%, Projects 20%
+-- CSCI 101: Participation 10%, Homework 20%, Tests 50%, Projects 20%
 INSERT INTO Category (course_id, category_name, weight) VALUES
     (1, 'Participation', 10),
     (1, 'Homework',      20),
     (1, 'Tests',         50),
     (1, 'Projects',      20);
  
--- CS 301: Participation 15%, Homework 25%, Tests 40%, Projects 20%
+-- CSCI 301: Participation 15%, Homework 25%, Tests 40%, Projects 20%
 INSERT INTO Category (course_id, category_name, weight) VALUES
     (2, 'Participation', 15),
     (2, 'Homework',      25),
@@ -57,7 +57,7 @@ INSERT INTO Category (course_id, category_name, weight) VALUES
     (3, 'Tests',         60);
  
 -- Assignments
--- CS 101
+-- CSCI 101
 INSERT INTO Assignment (category_id, assignment_name, max_score) VALUES
     (1, 'Participation Week1-7', 100);
 INSERT INTO Assignment (category_id, assignment_name, max_score) VALUES
@@ -67,7 +67,7 @@ INSERT INTO Assignment (category_id, assignment_name, max_score) VALUES
 INSERT INTO Assignment (category_id, assignment_name, max_score) VALUES
     (4, 'Project1', 100), (4, 'Project2', 100);
  
--- CS 301
+-- CSCI 301
 INSERT INTO Assignment (category_id, assignment_name, max_score) VALUES
     (5, 'Participation Score', 100);
 INSERT INTO Assignment (category_id, assignment_name, max_score) VALUES
@@ -86,7 +86,7 @@ INSERT INTO Assignment (category_id, assignment_name, max_score) VALUES
     (11, 'Quiz1', 100), (11, 'Quiz2', 100), (11, 'Midterm', 100), (11, 'Final', 100);
  
 -- Scores
--- CS 101 (assignment IDs 1-10, student IDs 1-5)
+-- CSCI 101 (assignment IDs 1-10, student IDs 1-5)
 INSERT INTO Score (assignment_id, student_id, score) VALUES
     (1,1,90),(1,2,85),(1,3,95),(1,4,80),(1,5,88);
 INSERT INTO Score (assignment_id, student_id, score) VALUES
@@ -102,7 +102,7 @@ INSERT INTO Score (assignment_id, student_id, score) VALUES
     (9,1,94),(9,2,80),(9,3,89),(9,4,92),(9,5,83),
     (10,1,90),(10,2,77),(10,3,95),(10,4,88),(10,5,85);
  
--- CS 301 (assignment IDs 11-17, student IDs 1,3,6,7,8)
+-- CSCI 301 (assignment IDs 11-17, student IDs 1,3,6,7,8)
 INSERT INTO Score (assignment_id, student_id, score) VALUES
     (11,1,92),(11,3,88),(11,6,80),(11,7,95),(11,8,85);
 INSERT INTO Score (assignment_id, student_id, score) VALUES
