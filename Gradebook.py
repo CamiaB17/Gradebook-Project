@@ -117,8 +117,7 @@ def task6(cursor, course_id):
     rows = run_query(cursor, sql, (course_id,))
     print_results(rows, ["last","first","category","assignment","score","max"])
  
- 
-# ------------------------------------------------------------------
+ # ------------------------------------------------------------------
 # TASK 7 - Add an assignment to a course
 # ------------------------------------------------------------------
 def task7(cursor, conn, category_id, assignment_name, max_score=100):
@@ -129,11 +128,12 @@ def task7(cursor, conn, category_id, assignment_name, max_score=100):
         INSERT IGNORE INTO Assignment (category_id, assignment_name, max_score)
         VALUES (%s, %s, %s)
     """, (category_id, assignment_name, max_score))
-    new_assignment_id = cursor.lastrowid
 
-   if cursor.rowcount == 0:
+    if cursor.rowcount == 0:
         print(f"  '{assignment_name}' already exists, skipping.")
         return
+
+    new_assignment_id = cursor.lastrowid
 
     # find the course this category belongs to
     cursor.execute(
