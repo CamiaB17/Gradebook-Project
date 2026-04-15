@@ -404,22 +404,25 @@ SELECT
     s.first_name,
     s.last_name,
     c.course_name,
-    ROUND(
-        SUM(
-            (COALESCE(SUM(sc.score), 0) / SUM(a.max_score)) * ct.weight
-        ) / SUM(ct.weight) * 100,
-    2) AS final_grade_pct
-FROM Enrollment e
-JOIN Student    s  ON e.student_id   = s.student_id
-JOIN Course     c  ON e.course_id    = c.course_id
-JOIN Category   ct ON ct.course_id   = c.course_id
-JOIN Assignment a  ON a.category_id  = ct.category_id
-LEFT JOIN Score sc ON sc.assignment_id = a.assignment_id
-                   AND sc.student_id   = s.student_id
-WHERE e.course_id  = 1    -- change course
-  AND e.student_id = 1    -- change student
-GROUP BY s.student_id, s.first_name, s.last_name,
-         c.course_id, c.course_name, ct.category_id, ct.weight;
+    ROUND(SUM(cat_weighted) / SUM(cat_weight) * 100, 2) AS final_grade_pct
+FROM (
+    SELECT
+        e.student_id,
+        ct.category_id,
+        ct.weight AS cat_weight,
+        (COALESCE(SUM(sc.score), 0) / SUM(a.max_score)) * ct.weight AS cat_weighted
+    FROM Enrollment e
+    JOIN Category   ct ON ct.course_id   = e.course_id
+    JOIN Assignment a  ON a.category_id  = ct.category_id
+    LEFT JOIN Score sc ON sc.assignment_id = a.assignment_id
+                       AND sc.student_id   = e.student_id
+    WHERE e.course_id  = 1
+      AND e.student_id = 1
+    GROUP BY e.student_id, ct.category_id, ct.weight
+) AS cat_scores
+JOIN Student s ON cat_scores.student_id = s.student_id
+JOIN Course  c ON c.course_id = 1
+GROUP BY s.student_id, s.first_name, s.last_name, c.course_name;
 
 
 -- Final grade for ALL students in a course (course_id = 1)
