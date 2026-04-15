@@ -307,7 +307,7 @@ def task11(cursor, course_id, student_id):
         possible = sum(r[0] for r in rows if r[1] is not None)
  
         if possible > 0:
-            cat_pct = (earned / possible) * 100
+            cat_pct = (float(earned) / float(possible)) * 100
         else:
             cat_pct = 0.0
  
@@ -368,7 +368,7 @@ def task12(cursor, course_id, student_id):
         possible = sum(r[0] for r in scored)
  
         if possible > 0:
-            cat_pct = (earned / possible) * 100
+            cat_pct = (float(earned) / float(possible)) * 100
         else:
             cat_pct = 0.0
  
